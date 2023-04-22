@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="sale.css">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Top Navigation Menu -->
+<div class="topnav">
+  <a href="index.html" class="active">Sales</a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="myLinks">
+    <a href="weather.html">Weather</a>
+    <a href="map.html">Border Alert</a>
+    <a href="health.html">Health</a>
+    <a href="videos.html">Instructions</a>
+    
+    
+    
+  
+    
+  </div>
+  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+	<title>sale</title>
+</head>
+<body>
+
+  
+
+
+	<div class="container">
+  <div class="box">
+    <div class="price">₹199</div>
+    <img src="images/vilai.png" alt="product1">
+    <div class="fname">விளை மீன்(Emperor fish)</div>
+  </div>
+   
+  <div class="box">
+    <div class="price">₹299</div>
+    <img src="images/kenda.png" alt="product2">
+    <div class="fname">கெண்டை மீன்(Carp fish)</div>
+  </div>
+  <div class="box">
+    <div class="price">₹899</div>
+    <img src="images/sheela.png" alt="product3">
+    <div class="fname">சீலா மீன் (Barracuda fish)</div>
+  </div>
+  <div class="box">
+    <div class="price">₹599</div>
+    <img src="images/vanjaram.png" alt="product4">
+    <div class="fname">வஞ்சரம் மீன் (Seer fish)</div>
+  </div>
+</div>
+
+<script src="sale.js"></script>
+
+
+<script>
+	
+	const container = document.querySelector('.container');
+const box = document.querySelector('.box');
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth < 800) {
+    container.style.flexDirection = 'column';
+    box.style.width = '100%';
+    box.style.height = '200px';
+  } else {
+    container.style.flexDirection = 'row';
+    box.style.width = '300px';
+    box.style.height = '400px';
+  }
+});
+
+</script>
+
+</body>
+</html>

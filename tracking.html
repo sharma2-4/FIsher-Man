@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Live Boat Routing Location Tracking</title>
+  <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+</head>
+<body>
+    <div id='myMap' style='position:relative;width:100%;height:500px;'></div>
+    <script type="text/javascript">
+var map;
+var ship;
+var pin;
+var pinInfobox;
+
+function GetMap() {
+  map = new Microsoft.Maps.Map('#myMap', {
+    credentials: 'ArvodCwhSHAyy3GR4qTIkOd_8MAbUatlfBD5aLe8s9HBF5_oSox1d2FeZQao62Xm'
+  });
+
+  // Add the ship image to the map
+  ship = new Microsoft.Maps.Pushpin(map.getCenter(), {
+    icon: 'ship.png',
+    anchor: new Microsoft.Maps.Point(16, 16)
+  });
+  map.entities.push(ship);
+
+  // Add a pin to the map to display the ship's current location
+  pin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+    visible: false
+  });
+  map.entities.push(pin);
+
+  // Add an infobox to the pin to display the ship's name and speed
+  pinInfobox = new Microsoft.Maps.Infobox(pin.getLocation(), {
+    visible: false,
+    title: '',
+    description: ''
+  });
+  pinInfobox.setMap(map);
+}</script>
+<script type="text/javascript">
+    var start = 'Kilakarai, India';
+var end = 'Sri Lanka border';
+var url = 'https://dev.virtualearth.net/REST/v1/Routes/Driving?';
+
+
+    var timer = setInterval(function () {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.myshiptracking.com/v1/track?imo=1234567', true);
+  xhr.onload = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      var location = new Microsoft.Maps.Location(data.latitude, data.longitude);
+      var speed = data.speed;
+
+      // Update the ship's location and infobox
+      ship.setLocation(location);
+      pin.setLocation(location);
+      pinInfobox.setOptions({
+        visible: true,
+        title: 'Ship Name',
+        description: 'Speed: ' + speed + ' knots'
+      });
+    }
+  };
+  xhr.send();
+}, 5000); // Update every 5 seconds
+
+</script>
+</body>
+</html>
